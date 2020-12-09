@@ -1,8 +1,17 @@
 RewriteEngine on
 
-# Respeta directorios y archivos existentes
+# http to https :-)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Respect existing directories :-)
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule .* - [L]
+
+# Remove last / :-)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} /(.*)/$
+RewriteRule ^ /%1 [R,L]
 
 RewriteRule ^(.*)$ index.php [QSA,L]

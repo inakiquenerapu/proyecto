@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Proyecto</title>
-  <base href="<?=$url->realPath;?>/">
+  <base href="<?=$url->baseUrl;?>">
   <link rel="stylesheet" href="theme/styles.css" />
 </head>
 <body>
-  Header
+  Header (<?=$url->langInfo["nativeName"];?>)
   <hr>
