@@ -1,9 +1,9 @@
 <?php
 
   $meta["title"] = [
-    "en" => "About",
-    "es" => "Acerca de",
-    "gl" => "Acerca de",
+    "en" => "More",
+    "es" => "Más",
+    "gl" => "Máis",
   ];
 
   require_once $meta["themesDir"].$meta["theme"]."/header.php";
@@ -16,9 +16,9 @@
   ];
 
   $txt = [
-    "en" => "About page.",
-    "es" => "Página sobre este sitio.",
-    "gl" => "Páxina sobre este sitio.",
+    "en" => "This page is the more.php file.",
+    "es" => "Esta página es el archivo more.php.",
+    "gl" => "Esta páxina é o arquivo more.php.",
   ];
 
 ?>

@@ -47,6 +47,11 @@ class Url {
     $this->realPath           = (substr($self,-1)=="/" ? $self : $self."/");
     $this->path               = $_SERVER["REDIRECT_URL"] ?? $this->realPath;
 //  $this->path               = isset($_SERVER["REDIRECT_URL"]) ? $_SERVER["REDIRECT_URL"] : $this->realPath; // PHP < 7
+/*
+    $this->fullUrl            = $this->scheme."://".$_SERVER["HTTP_HOST"].
+                                (!in_array($_SERVER["SERVER_PORT"],[80,443]) ? ":".$_SERVER["SERVER_PORT"] : "").
+                                $_SERVER["REQUEST_URI"];
+*/
     $this->baseUrl            = $this->scheme."://".$this->host.$this->realPath;
     $this->virtualPath        = preg_replace('/'.str_replace('/','\/',$this->realPath).'/','',$this->path,1);
     $this->virtualPathArray   = array_values(array_filter(explode("/",$this->virtualPath)));

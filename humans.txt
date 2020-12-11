@@ -1,0 +1,33 @@
+/* PROJECT */
+
+	Site Name:   TRECE.io
+	Site URL:    https://trece.io
+	Created:     2019/01/01
+	Standards:   PHP, HTML, CSS, JavaScript
+	Web Design:  Iñaki Quenerapú @ BoaIdea
+
+/* AUTHOR */
+
+	Name:        Iñaki Quenerapú
+	Nickname:    Quenerapú
+	Title:       Well I'm just an array();
+	Location:    Santiago de Compostela, Spain
+	Site:        https://trece.io
+	Blog:        https://trece.io/blog
+	Contact:     https://trece.io/contact
+	Donation:    https://buymeacoffee.com/quenerapu
+
+/* SOCIAL */
+
+	Twitter:     https://twitter.com/quenerapu
+	GitHub:      https://github.com/quenerapu
+	Instagram:   https://instagram.com/quenerapu
+	YouTube:     https://youtube.com/c/quenerapu
+
+/* META */
+
+	Built with: PHP, HTML, CSS, JavaScript
+
+/* THANKS */
+
+	To everyone who shares, likes, comments, and contributes!
