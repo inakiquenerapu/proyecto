@@ -1,11 +1,19 @@
-  <footer>
+  </main>
 
-    <hr>
-    Footer (<?=$version;?>)
+</content>
 
-  </footer>
+<footer>
 
-</main>
+  <span id="login">
+    <?= $login->isLogged() ?
+        $links->item("Logout", "?logout") :
+        $links->item("Login", "login");
+    ?>
+  </span>
+
+  Proyecto <?=$version;?>. <?=$url->langInfo["nativeName"];?>
+
+</footer>
 
 </body>
 </html>

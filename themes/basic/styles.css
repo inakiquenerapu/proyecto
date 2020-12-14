@@ -1,5 +1,122 @@
-* {color: red;}
-nav .selected {background-color: yellow; color: black;}
-nav span {padding: 20px;}
-nav a {text-decoration: none; color: blue;}
-nav a:hover {text-decoration: underline;}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+/* CONTENT */
+
+content {
+  flex: 1 0 auto;
+}
+
+
+
+/* HEADER */
+
+header {
+  background-color: orange;
+  padding: 2em 2em 0 2em;
+}
+
+
+
+/* NAV */
+
+nav {
+  margin-top: 1em;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  color: black;
+}
+
+  nav span span {
+    padding: 1em;
+  }
+
+  nav span span {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+  }
+
+  nav span span:hover {
+    background: #ddd;
+  }
+
+  nav span span.selected {
+    background-color: white;
+    color: black;
+  }
+
+
+
+/* MAIN */
+
+main {
+  padding: 2em;
+}
+
+  main h1,
+  main p{
+    margin-bottom: 1em;
+  }  
+
+
+
+/* FOOTER */
+
+  footer {
+    flex-shrink: 0;
+    background-color: #ddd;
+    padding: 2em 2em 6em 2em;
+  }
+
+
+
+/* FORM */
+
+
+form {
+  margin-top: 1em;
+  max-width: 22em;
+}
+
+  form .row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1em;
+  }
+
+  form .row > label {
+    padding: .5em 1em .5em 0;
+    flex: 1;
+  }
+
+  form .row > input.not(type=submit) {
+    flex: 2;
+  }
+
+  form input[type=submit]{
+    font-size: 1.5em;
+  }
+
+.alert{
+  background-color: pink;
+  color: red;
+  font-weight: bold;
+  padding: 1em;
+  margin-bottom: 1em;
+}

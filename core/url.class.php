@@ -113,6 +113,7 @@ class Url {
     endif;
 
     $this->virtualPathNoLang  = $this->multilingual ? preg_replace('/'.str_replace('/','\/',$this->lang).'/','',$this->virtualPath,1) : $this->virtualPath;
+    $this->baseUrlLang        = $this->baseUrl.($this->multilingual ? $this->lang."/":"");
 
     $langsJson = file_get_contents("langs.json");
     $langsJson = json_decode($langsJson,true);

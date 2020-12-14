@@ -55,35 +55,31 @@ class Links {
     $slug = substr($slug,0,1) === "!" ? ltrim($slug,"!") : $slug;
     $externalLink = substr($slug,0,4) === "http" ?? false;
     $stuff =
+             (!$selected ? '<a href="' : "").
+             (!$externalLink ? 
+               (!$selected ? $this->baseUrl : "").
+               (!$selected ? 
+                 (isset($this->isLang) && !$this->isLang ? 
+                       ($this->multilingual?$this->lang."/".($slug??""):($slug??"")) :
+                       ($this->independent ? 
+                         ($this->multilingual?$this->lang."/".($slug??""):($slug??"")) :
+                         ($slug??"").$this->virtualPathNoLang
+                       )
+                 )
+                 : ""
+               ).
+               (!$selected ? ($slug!="?logout" && $this->query!="" ? "?".$this->query : "") : "")
+               : $slug
+             ).
+             (!$selected ? '"'.($targetBlank ? ' target="_blank" rel="noopener noreferrer nofollow"' : "").'>' : "").
              ($tag?"<".$tag.
                (!$id ? "" : ' id="'.$id.'"').
                ($selected || $class ? ' class="'.($selected ? "selected" : "").($class ? ($selected ? " " : "").$class : "").'"' : "").
              ">"
              :"").
-    
-               (!$selected ? '<a href="' : "").
-
-               (!$externalLink ? 
-                 (!$selected ? $this->baseUrl : "").
-                 (!$selected ? 
-                     (isset($this->isLang) && !$this->isLang ? 
-                         ($this->multilingual?$this->lang."/".($slug??""):($slug??"")) :
-                         ($this->independent ? 
-                           ($this->multilingual?$this->lang."/".($slug??""):($slug??"")) :
-                           ($slug??"").$this->virtualPathNoLang
-                         )
-                     ) 
-                 : ""
-                 ).
-                 (!$selected ? ($slug!="?logout" && $this->query!="" ? "?".$this->query : "") : "")
-                 : $slug
-               ).
-
-               (!$selected ? '"'.($targetBlank ? ' target="_blank" rel="noopener noreferrer nofollow"' : "").'>' : "").
                $title.
-               (!$selected ? "</a>" : "").
-    
-             ($tag?"</".$tag.">":"");
+             ($tag?"</".$tag.">":"").
+             (!$selected ? "</a>" : "");
 
       return $stuff;
 

@@ -31,6 +31,11 @@ return [
       "es" => "Más",
       "gl" => "Máis",
     ],
+    "private"  => [
+      "en" => "Private page",
+      "es" => "Página privada",
+      "gl" => "Páxina privada",
+    ],
   ],
 
 # -------------------------

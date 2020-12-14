@@ -73,12 +73,9 @@
 </head>
 <body>
 
-<main>
+<content>
 
   <header>
-
-    Header (<?=$url->langInfo["nativeName"];?>)
-    <hr>
 
 <?php
 
@@ -87,3 +84,5 @@
 ?>
 
   </header>
+
+  <main>
