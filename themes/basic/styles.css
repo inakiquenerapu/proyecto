@@ -1,1 +1,5 @@
-* {color:red;}
+* {color: red;}
+nav .selected {background-color: yellow; color: black;}
+nav span {padding: 20px;}
+nav a {text-decoration: none; color: blue;}
+nav a:hover {text-decoration: underline;}

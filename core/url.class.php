@@ -26,12 +26,12 @@ class Url {
       "gl",
     ];
 
+/*
     $this->langs = [ # Option three: there are more than one language and grouped sub-languages. URL changes accordingly.
       "en"=>["en"],
       "es"=>["es","as","ct","eu"],
       "gl"=>["gl"],
     ];
-/*
 */
     $this->langs = !isset($this->langs) ? [] : array_remove_empty($this->langs);
     if(!isset($this->langs) || count($this->langs)==0 || (is_multiArray($this->langs) && count($this->langs)==1)): die("Wrong language options. Bye."); endif;
@@ -46,8 +46,8 @@ class Url {
     $this->host               = $this->domain.($this->port ? ":".$this->port : "");
     $this->realPath           = (substr($self,-1)=="/" ? $self : $self."/");
     $this->path               = $_SERVER["REDIRECT_URL"] ?? $this->realPath;
-//  $this->path               = isset($_SERVER["REDIRECT_URL"]) ? $_SERVER["REDIRECT_URL"] : $this->realPath; // PHP < 7
 /*
+    $this->path               = isset($_SERVER["REDIRECT_URL"]) ? $_SERVER["REDIRECT_URL"] : $this->realPath; // PHP < 7
     $this->fullUrl            = $this->scheme."://".$_SERVER["HTTP_HOST"].
                                 (!in_array($_SERVER["SERVER_PORT"],[80,443]) ? ":".$_SERVER["SERVER_PORT"] : "").
                                 $_SERVER["REQUEST_URI"];
@@ -55,6 +55,8 @@ class Url {
     $this->baseUrl            = $this->scheme."://".$this->host.$this->realPath;
     $this->virtualPath        = preg_replace('/'.str_replace('/','\/',$this->realPath).'/','',$this->path,1);
     $this->virtualPathArray   = array_values(array_filter(explode("/",$this->virtualPath)));
+    $this->query              = $_SERVER["QUERY_STRING"];
+                                parse_str($this->query,$this->queryArray);
 
     if(!$this->multilingual) :
 

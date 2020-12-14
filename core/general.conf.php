@@ -10,6 +10,31 @@ return [
 
 # -------------------------
 
+  "navLinks"   => [
+    "home"     => [
+      "en" => "Home",
+      "es" => "Inicio",
+      "gl" => "Inicio",
+    ],
+    "about"    => [
+      "en" => "About",
+      "es" => "Acerca de",
+      "gl" => "Acerca de",
+    ],
+    "contact"  => [
+      "en" => "Contact",
+      "es" => "Contacto",
+      "gl" => "Contacto",
+    ],
+    "more"     => [
+      "en" => "More",
+      "es" => "Más",
+      "gl" => "Máis",
+    ],
+  ],
+
+# -------------------------
+
   "theme" => "basic",
 
   "siteName" => [

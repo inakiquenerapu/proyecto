@@ -80,4 +80,10 @@
     Header (<?=$url->langInfo["nativeName"];?>)
     <hr>
 
+<?php
+
+  require_once $meta["themesDir"].$meta["theme"]."/nav.php";
+
+?>
+
   </header>
