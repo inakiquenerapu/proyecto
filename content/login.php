@@ -15,9 +15,9 @@
     isset($_POST["login-password"])
     ) :
 
-      $login->username = $_POST["login-username"];
-      $login->password = $_POST["login-password"];
-      $login->checkLoginForm();
+    $login->username = $_POST["login-username"];
+    $login->password = $_POST["login-password"];
+    $login->checkLoginForm();
 
   endif;
 
@@ -66,9 +66,9 @@
 
 <h1><?=$hi[$url->lang];?></h1>
 
-<form method="post">
+<form id="login" method="post">
 
-<?php if (isset($login->fail)) : ?>
+<?php if(isset($login->fail)) : ?>
   <div class="alert">
     <?=$error[$url->lang];?>
   </div>

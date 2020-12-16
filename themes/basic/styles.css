@@ -89,9 +89,14 @@ main {
 /* FORM */
 
 
-form {
+form#login {
   margin-top: 1em;
-  max-width: 22em;
+  max-width: 24em;
+}
+
+form#contact {
+  margin-top: 1em;
+  max-width: 40em;
 }
 
   form .row {
@@ -102,21 +107,51 @@ form {
 
   form .row > label {
     padding: .5em 1em .5em 0;
-    flex: 1;
-  }
-
-  form .row > input.not(type=submit) {
     flex: 2;
   }
 
-  form input[type=submit]{
-    font-size: 1.5em;
+  form#contact .row > label {
+    flex: 1;
   }
 
-.alert{
-  background-color: pink;
-  color: red;
+  form .row > textarea,
+  form .row > input,
+  form .row > button,
+  form .row > select {
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  form .row > input:not([type="submit"]),
+  form .row > textarea {
+    flex: 4;
+    padding: .6em;
+    border: 0;
+    background-color: #ddd;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+  }
+
+  form .row > textarea {
+    height: 20em;
+    resize: none;
+  }
+
+div.alert,
+div.done {
   font-weight: bold;
   padding: 1em;
   margin-bottom: 1em;
+  padding: 1em;
+}
+
+div.alert {
+  background-color: pink;
+  color: red;
+}
+
+div.done {
+  background-color: yellowgreen;
+  color: black;
 }
