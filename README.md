@@ -5,5 +5,5 @@ Proyecto de gestor de contenidos minimalista. Viene de https://t.me/joinchat/AAA
 - https://virtualbox.org
 - https://turnkeylinux.org
 - https://diffchecker.com
-- https://meldmerge.org/
+- https://meldmerge.org
 - https://github.com/PHPMailer/PHPMailer
