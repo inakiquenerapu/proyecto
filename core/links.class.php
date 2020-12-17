@@ -49,11 +49,14 @@ class Links {
 
   function item($title, $slug=false, $tag=false, $id=false, $class=false) {
 
-    $this->independent = !isset($this->isLang) ?? false;
-    $selected = !$this->independent && $tag && substr($slug,0,1) === "!" ?? false;
-    $targetBlank = $this->independent && substr($slug,0,1) === "!" ?? false;
+    $this->isIndependent = !isset($this->isLang) ?? false;
+    $noMoreVirtualPath = !$this->isIndependent && substr($slug,0,1) === "*" ?? false;
+    $slug = substr($slug,0,1) === "*" ? ltrim($slug,"*") : $slug;
+    $selected = !$this->isIndependent && $tag && substr($slug,0,1) === "!" ?? false;
+    $targetBlank = $this->isIndependent && substr($slug,0,1) === "!" ?? false;
     $slug = substr($slug,0,1) === "!" ? ltrim($slug,"!") : $slug;
     $externalLink = substr($slug,0,4) === "http" ?? false;
+  
     $stuff =
              (!$selected ? '<a href="' : "").
              (!$externalLink ? 
@@ -61,10 +64,10 @@ class Links {
                (!$selected ? 
                  (isset($this->isLang) && !$this->isLang ? 
                        ($this->multilingual?$this->lang."/".($slug??""):($slug??"")) :
-                       ($this->independent ? 
+                       ($this->isIndependent ? 
                          ($this->multilingual?$this->lang."/".($slug??""):($slug??"")) :
-                         ($slug??"").$this->virtualPathNoLang
-                       )
+                         (!$noMoreVirtualPath ? ($slug??"") : "")
+                       ).(!$noMoreVirtualPath ? $this->virtualPathNoLang : ($slug??""))
                  )
                  : ""
                ).

@@ -74,7 +74,8 @@
 
         $_SESSION = array();
         session_destroy();
-        header("location: ".$this->baseUrlLang);
+        // Post/Redirect/Get pattern: http://en.wikipedia.org/wiki/Post/Redirect/Get
+        header("Location: ".$this->baseUrlLang, true, 303);
         die();
 
       endif;

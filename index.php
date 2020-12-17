@@ -3,6 +3,7 @@
   session_start();
 
   $version = trim(fgets(fopen("version","r")));
+  date_default_timezone_set("Europe/Madrid");
   $meta = (array) require_once "core/general.conf.php";
   require_once("core/functions.php");
   require_once("core/url.class.php");
@@ -34,6 +35,10 @@
 
       $page = $meta["contentDir"].$url->virtualPathArray[0].".php";
 
+    elseif(file_exists($meta["contentDir"].$url->virtualPathArray[0].".md")) :
+
+      $page = $meta["contentDir"].$url->virtualPathArray[0].".md";
+
     elseif(file_exists($meta["contentDir"].$url->virtualPathArray[0]."/index.php")) :
 
       $page = $meta["contentDir"].$url->virtualPathArray[0]."/index.php";
@@ -43,10 +48,36 @@
 
   else :
 
-    $page = $meta["contentDir"]."home.php";
+    $page = file_exists($meta["contentDir"]."home.php") ? 
+            $meta["contentDir"]."home.php" :
+            (
+              file_exists($meta["contentDir"]."home.md") ?
+              $meta["contentDir"]."home.md" :
+              false
+            );
 
   endif;
 
-  require_once $page;
+  $ext = explode(".",$page);
+  $ext = array_pop($ext);
+
+  if($ext == "php"):
+
+    require_once $page;
+
+  elseif($ext == "md"):
+
+    require_once "core/markdown.class.php";
+    $html = new Markdown($page,$url);
+    require_once $meta["themesDir"].$meta["theme"]."/header.php";
+//  require_once $meta["themesDir"].$meta["theme"]."/nav.php";
+    echo $html->page;
+    require_once $meta["themesDir"].$meta["theme"]."/footer.php";
+
+  else:
+
+    echo "Error: file not found.";
+
+  endif;
 
 ?>

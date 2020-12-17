@@ -6,8 +6,8 @@
 
   <span id="login">
     <?= $login->isLogged() ?
-        $links->item("Logout", "?logout") :
-        $links->item("Login", "login");
+        $links->item("Logout", "*?logout") :
+        $links->item("Login", "*login");
     ?>
   </span>
 

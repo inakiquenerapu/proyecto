@@ -1,6 +1,6 @@
 <?php
 
-  $meta = isset($html->headerMeta) ? array_merge(require_once("core/generic.conf.php"),$html->headerMeta) : $meta;
+  $meta = isset($html->headerMeta) ? array_merge($meta,$html->headerMeta) : $meta;
 
 //  PHP < 7.3: addslashes($str);
 //  PHP > 7.3: filter_var($str, FILTER_SANITIZE_ADD_SLASHES);
@@ -29,13 +29,18 @@
 
 <!-- OG (The Open Graph protocol) https://ogp.me/ -->
   <meta property="fb:app_id" content="123456789012345">
-  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="<?=addslashes($meta["siteName"][$url->lang]);?>">
+  <meta property="og:type" content="article">
+  <meta property="og:type" content="website --> <!=$url->virtualPath;?>">
   <meta property="og:url" content="<?=$url->baseUrl.$url->virtualPath;?>">
   <meta property="og:title" content="<?=addslashes($meta["title"][$url->lang]);?>">
-  <meta property="og:image" content="<?=$url->baseUrl.$meta["imgDir"].$meta["ogImageFile"];?>"><!-- 1200×628 px -->
-  <meta property="og:description" content="<?=addslashes($meta["ogImageDescription"][$url->lang]);?>">
+  <meta property="og:description" content="<?=addslashes($meta["description"][$url->lang]);?>">
+  <meta property="article:published_time" content="<?=$meta["date"];?>">
+  <meta property="article:author" content="Name">
+  <meta property="og:image" content="<?=(substr($meta["ogImageFile"],0,4)==="http" ? $meta["ogImageFile"] : $url->baseUrl.$meta["imgDir"].$meta["ogImageFile"]);?>">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="627">
   <meta property="og:image:alt" content="<?=addslashes($meta["ogImageAlt"][$url->lang]);?>">
-  <meta property="og:site_name" content="<?=addslashes($meta["siteName"][$url->lang]);?>">
 
 <!-- Twitter Cards https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started -->
   <meta name="twitter:card" content="summary_large_image">

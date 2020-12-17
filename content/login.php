@@ -19,6 +19,12 @@
     $login->password = $_POST["login-password"];
     $login->checkLoginForm();
 
+    if(isset($login->fail)) : $_SESSION["loginFail"] = true; endif;
+
+//  Post/Redirect/Get pattern: http://en.wikipedia.org/wiki/Post/Redirect/Get
+    header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+    die();
+
   endif;
 
 //$headerMeta = require_once("genericHeaderMeta.php");
@@ -68,7 +74,7 @@
 
 <form id="login" method="post">
 
-<?php if(isset($login->fail)) : ?>
+<?php if(isset($_SESSION["loginFail"])) : unset($_SESSION["loginFail"]); ?>
   <div class="alert">
     <?=$error[$url->lang];?>
   </div>
