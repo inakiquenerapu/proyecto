@@ -8,9 +8,13 @@ return [
   "themesDir"  => "themes/",
   "contentDir" => "content/",
 
+  "loginFile"  => "login",
+  "adminFile"  => "admin",
+  "filesFile"  => "files.json",
+
 # -------------------------
 
-  "navLinks"   => [
+  "navLinks"   => $navLinks = [
     "home"     => [
       "en" => "Home",
       "es" => "Inicio",
@@ -40,6 +44,8 @@ return [
 
 # -------------------------
 
+  "homePage" => array_key_first($navLinks),
+  "error404Page" => "404",
   "theme" => "basic",
 
   "siteName" => [

@@ -48,30 +48,32 @@
 
   else :
 
-    $page = file_exists($meta["contentDir"]."home.php") ? 
-            $meta["contentDir"]."home.php" :
+    $page = file_exists($meta["contentDir"].$meta["homePage"].".php") ?
+            $meta["contentDir"].$meta["homePage"].".php" :
             (
-              file_exists($meta["contentDir"]."home.md") ?
-              $meta["contentDir"]."home.md" :
+              file_exists($meta["contentDir"].$meta["homePage"].".md") ?
+              $meta["contentDir"].$meta["homePage"].".md" :
               false
             );
 
   endif;
 
-  $ext = explode(".",$page);
-  $ext = array_pop($ext);
+  $extension = explode(".",$page);
+  $fileName = explode("/",array_shift($extension));
+  $extension = array_pop($extension);
+  $fileName = array_pop($fileName);
 
-  if($ext == "php"):
+  if($extension == "php"):
 
     require_once $page;
 
-  elseif($ext == "md"):
+  elseif($extension == "md"):
 
     require_once "core/markdown.class.php";
     $html = new Markdown($page,$url);
     require_once $meta["themesDir"].$meta["theme"]."/header.php";
-//  require_once $meta["themesDir"].$meta["theme"]."/nav.php";
     echo $html->page;
+    echo ($login->isLogged() ? "<h1><a class=\"noUnderline\" href=\"".$url->baseUrlLang.$meta["adminFile"]."/".$fileName."\">📝</a></h1>" : "");
     require_once $meta["themesDir"].$meta["theme"]."/footer.php";
 
   else:

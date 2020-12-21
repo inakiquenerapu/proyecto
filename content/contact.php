@@ -21,8 +21,6 @@
 
     if(isset($contact->fail)) : $_SESSION["contactFormFail"] = true; endif;
     if(isset($contact->done)) : $_SESSION["contactFormDone"] = true; endif;
-
-//  Post/Redirect/Get pattern: http://en.wikipedia.org/wiki/Post/Redirect/Get
     header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
     die();
 

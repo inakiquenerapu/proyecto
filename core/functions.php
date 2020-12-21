@@ -69,3 +69,51 @@ function is_multiArray($a) {
 
 
 
+/* ------
+
+  readHead
+
+  Reads the header of the markdown files
+
+------ */
+
+function readHead($filepath) {
+
+  $heads = [];
+  $newHead = [];
+  $metalines = ["[title]","[date]","[description]","[keywords]","[ogImageFile]","[ogImageAlt]"];
+  $start = 0;
+  $lines = 6;
+  $file = new SplFileObject($filepath);
+  $file->seek($start); // go to line $start
+  for($i = 0; $i < $lines and $file->valid(); $i++, $file->next()) :
+    $heads[] = html_entity_decode($file->current());
+  endfor;
+
+  foreach($heads as $head) : foreach ($metalines as $metaline) : if (stripos($head,$metaline) !== false) : endif; endforeach; endforeach;
+
+  $metalines = str_replace(["[","]"],"",$metalines);
+  foreach($heads as $head) :
+    $head = explode(":",$head,2);
+    if($head[0]!="" && substr($head[0],0,1)=="[") :
+      $head[0] = trim($head[0]," [] ");
+      $head[1] = trim($head[1]); $head[1] = trim($head[1],"()"); $head[1] = ltrim($head[1],"# "); $head[1] = trim($head[1],'"');
+      if(in_array($head[0],["title","description","ogImageAlt"])) :
+        $tit = $head[0];
+        $head[1] = str_replace("|[",PHP_EOL."[",$head[1]);
+        $tmp_head1 = explode(PHP_EOL,trim($head[1]));
+        $tmp_head1 = str_replace("[","",$tmp_head1,$i);
+        foreach($tmp_head1 as $tmp_head1Item):
+          list($k,$v) = explode("]",$tmp_head1Item);
+          $tmp_head1Items[$k] = $v;
+        endforeach;
+        $head[1] = $tmp_head1Items;
+      endif;
+      if(in_array($head[0],$metalines)) : $newHead[$head[0]] = $head[1]; endif;
+    endif;
+  endforeach;
+
+  $file = null; // https://www.php.net/manual/es/class.splfileobject.php#113149
+  return $newHead;
+
+}

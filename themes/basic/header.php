@@ -10,47 +10,47 @@
 <head>
 
   <meta charset="UTF-8">
-  <title><?=addslashes($meta["title"][$url->lang]);?></title>
+  <title><?=addslashes(strip_tags($meta["title"][$url->lang]));?></title>
   <base href="<?=$url->baseUrl;?>" target="_self">
   <link rel="canonical" href="<?=$url->baseUrl.$url->virtualPath;?>">
   <link rel="author" type="text/plain" href="<?=$url->baseUrl;?>humans.txt" /><!-- http://humanstxt.org -->
   <meta name="lang" content="<?=$url->lang;?>">
   <meta name="generator" content="Your favourite code editor"><!-- https://stackoverflow.com/a/3632220 -->
   <meta name="robots" content="index, follow"><!-- https://developers.google.com/search/reference/robots_meta_tag -->
-  <meta name="description" content="<?=addslashes($meta["description"][$url->lang]);?>"/>
+  <meta name="description" content="<?=addslashes(strip_tags($meta["description"][$url->lang]));?>"/>
   <meta name="keywords" content="<?=$meta["keywords"];?>"><!-- https://www.sistrix.es/blog/la-meta-keywords-un-bulo-con-19-anos-de-antiguedad/ -->
   <meta http-equiv="cache-control" content="no-cache"/>
 
 <!-- DC (Dublin Core) https://www.dublincore.org/specifications/dublin-core/usageguide/2000-07-16/qualified-html/ -->
-  <meta name = "DC.Title" content = "<?=addslashes($meta["title"][$url->lang]);?>">
-  <meta name = "DC.Description.Abstract" content = "<?=addslashes($meta["description"][$url->lang]);?>">
+  <meta name = "DC.Title" content = "<?=addslashes(strip_tags($meta["title"][$url->lang]));?>">
+  <meta name = "DC.Description.Abstract" content = "<?=addslashes(strip_tags($meta["description"][$url->lang]));?>">
   <meta name = "DC.Date.Created" content = "<?=$meta["date"];?>">
   <meta name = "DC.Language" content = "<?=$url->lang;?>">
 
 <!-- OG (The Open Graph protocol) https://ogp.me/ -->
   <meta property="fb:app_id" content="123456789012345">
-  <meta property="og:site_name" content="<?=addslashes($meta["siteName"][$url->lang]);?>">
+  <meta property="og:site_name" content="<?=addslashes(strip_tags($meta["siteName"][$url->lang]));?>">
   <meta property="og:type" content="article">
   <meta property="og:type" content="website --> <!=$url->virtualPath;?>">
   <meta property="og:url" content="<?=$url->baseUrl.$url->virtualPath;?>">
-  <meta property="og:title" content="<?=addslashes($meta["title"][$url->lang]);?>">
-  <meta property="og:description" content="<?=addslashes($meta["description"][$url->lang]);?>">
+  <meta property="og:title" content="<?=addslashes(strip_tags($meta["title"][$url->lang]));?>">
+  <meta property="og:description" content="<?=addslashes(strip_tags($meta["description"][$url->lang]));?>">
   <meta property="article:published_time" content="<?=$meta["date"];?>">
   <meta property="article:author" content="Name">
   <meta property="og:image" content="<?=(substr($meta["ogImageFile"],0,4)==="http" ? $meta["ogImageFile"] : $url->baseUrl.$meta["imgDir"].$meta["ogImageFile"]);?>">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="627">
-  <meta property="og:image:alt" content="<?=addslashes($meta["ogImageAlt"][$url->lang]);?>">
+  <meta property="og:image:alt" content="<?=addslashes(strip_tags($meta["ogImageAlt"][$url->lang]));?>">
 
 <!-- Twitter Cards https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="<?=addslashes($meta["title"][$url->lang]);?>">
-  <meta name="twitter:image:alt" content="<?=addslashes($meta["ogImageAlt"][$url->lang]);?>">
-  <meta name="twitter:site" content="<?=addslashes($meta["siteName"][$url->lang]);?>">
+  <meta name="twitter:title" content="<?=addslashes(strip_tags($meta["title"][$url->lang]));?>">
+  <meta name="twitter:image:alt" content="<?=addslashes(strip_tags($meta["ogImageAlt"][$url->lang]));?>">
+  <meta name="twitter:site" content="<?=addslashes(strip_tags($meta["siteName"][$url->lang]));?>">
 
 <!-- Geo Stuff https://geo-tag.de -->
   <meta name="geo.region" content="<?=$meta["geoRegion"];?>" />
-  <meta name="geo.placename" content="<?=addslashes($meta["geoPlacement"][$url->lang]);?>" />
+  <meta name="geo.placename" content="<?=addslashes(strip_tags($meta["geoPlacement"][$url->lang]));?>" />
   <meta name="geo.position" content="<?=$meta["geoPositionLat"];?>;<?=$meta["geoPositionLon"];?>" />
 
 <!-- Favicon https://favicon-generator.org -->
@@ -72,8 +72,12 @@
   <meta name="msapplication-TileImage" content="<?=$url->baseUrl.$meta["imgDir"];?>favicon/ms-icon-144x144.png" />
   <meta name="theme-color" content="#ffffff" />
 
+<?=isset($customJSforHeader)?$customJSforHeader:"";?>
+
 <!-- Custom CSS -->
   <link rel="stylesheet" href="<?=$meta["themesDir"].$meta["theme"];?>/styles.css<?="?".time();?>" />
+
+<?=isset($customCSSforHeader)?$customCSSforHeader:"";?>
 
 </head>
 <body>

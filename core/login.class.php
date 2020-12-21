@@ -27,7 +27,7 @@
 
 
     function isLogged() {
-    
+
       if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"]) :
 
         return true;
@@ -54,7 +54,7 @@
         ) :
 
         $_SESSION["loggedin"] = true;
-        header("location: ".$this->baseUrlLang);
+        header("Location: ".$this->baseUrlLang."admin");
         die();
 
       else :
@@ -74,7 +74,6 @@
 
         $_SESSION = array();
         session_destroy();
-        // Post/Redirect/Get pattern: http://en.wikipedia.org/wiki/Post/Redirect/Get
         header("Location: ".$this->baseUrlLang, true, 303);
         die();
 

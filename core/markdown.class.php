@@ -72,7 +72,7 @@ class Markdown {
 
     while((($line=fgets($this->file))!==false)&&($i++<$this->headerLines)):
 
-      $this->headerMeta["tmp"][]=trim($line);
+      $this->headerMeta["tmp"][]=trim(html_entity_decode($line));
 
     endwhile;
 
@@ -140,14 +140,13 @@ class Markdown {
 //  echo "<pre>".$this->page."</pre>";
 //  die();
 
-    $this->page = strstr($this->page,"[--");
+    $this->page = html_entity_decode(strstr($this->page,"[--"));
 
     if(strpos($this->page,"[--".$this->lang."--]".PHP_EOL) !== false) :
               $this->page = strstr($this->page,"[--".$this->lang."--]".PHP_EOL);
               $this->page = strstr($this->page,"[--/".$this->lang."--]".PHP_EOL,true);
               $this->page = preg_replace('/\[\-\-'.$this->lang.'\-\-\]/','',$this->page,1);
 
-  
     endif;
 
 //  echo "<hr><pre>".$this->page."</pre>";
@@ -208,10 +207,10 @@ class Markdown {
      *
      */
 
-    if(strpos($this->page,"<date>")    !==false) : $this->page = $this->filterDate($this->page);     endif;
-    if(strpos($this->page,"<block>")   !==false) : $this->page = $this->filterBlock($this->page);    endif;
-    if(strpos($this->page,"<videeo>")  !==false) : $this->page = $this->filterVideos($this->page);   endif;
-    if(strpos($this->page,"<slides>")  !==false) : $this->page = $this->filterSlides($this->page);   endif;
+    if(strpos($this->page,"[date]")   !==false) : $this->page = $this->filterDate($this->page);   endif;
+    if(strpos($this->page,"[block]")  !==false) : $this->page = $this->filterBlock($this->page);  endif;
+    if(strpos($this->page,"[video]")  !==false) : $this->page = $this->filterVideos($this->page); endif;
+    if(strpos($this->page,"[slides]") !==false) : $this->page = $this->filterSlides($this->page); endif;
 
   }
 
@@ -264,7 +263,7 @@ class Markdown {
      *
      */
 
-    $a = "<date>";
+    $a = "[date]";
     $b = "<i class=\"far fa-calendar-alt\"></i> ";
 //  $b = $this->langInfo["variant"];
     $b.= date($this->dateFormat,strtotime($this->headerMeta["date"]));
@@ -285,7 +284,7 @@ class Markdown {
      *
      */
 
-    $a = ["<block>","</block>"];
+    $a = ["[block]","[/block]"];
     $b = ["<div class=\"block\" markdown=1>","</div>"];
     $this->page = str_replace($a,$b,$this->page);
     return $this->page;
@@ -302,7 +301,7 @@ class Markdown {
      *
      */
 
-    $a = ["<videeo>","</videeo>"];
+    $a = ["[video]","[/video]"];
     $b = ["<div class=\"video-responsive\">","</div>"];
     $youtubeUrls = ["youtube.com","youtu.be"];
     $vimeoUrls = ["vimeo.com"];
@@ -348,7 +347,7 @@ class Markdown {
      *
      */
 
-    $a = ["<slides>","</slides>"];
+    $a = ["[slides]","[/slides]"];
     $b = ["<div class=\"slider sliderx\"><div class=\"slider-nav prev\">‹</div><div class=\"slider-thumbs\">","</div><div class=\"slider-nav next\">›</div></div>"];
     $s = "let sliderx=tns({'container':'.sliderx .slider-thumbs','nav':false,'controls':false,'gutter':20,'center':true,'arrowKeys':true,'responsive':{'900':{'items':2},'100':{'items': 1},},'slideBy':'page','mouseDrag':true,'swipeAngle':false,'speed':400,});document.querySelector('.sliderx .slider-nav.prev').onclick=function(){sliderx.goTo('prev');};document.querySelector('.sliderx .slider-nav.next').onclick=function(){sliderx.goTo('next');};let lightboxx=new SimpleLightbox('.sliderx .slider-thumbs a',{'history':false,'nav':true,'fileExt':'png|jpg|jpeg|php','enableKeyboard':false,'widthRatio':0.9,'captionDelay':500,'swipeClose':false,'showCounter':false,'docClose':false,});";
     $this->page = PHP_EOL.$this->page;

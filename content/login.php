@@ -5,7 +5,7 @@
 
   if($login->isLogged()) :
 
-    header("Location: ".$url->baseUrlLang);
+    header("Location: ".$url->baseUrlLang."admin");
     die();
 
   endif;
@@ -20,14 +20,12 @@
     $login->checkLoginForm();
 
     if(isset($login->fail)) : $_SESSION["loginFail"] = true; endif;
-
-//  Post/Redirect/Get pattern: http://en.wikipedia.org/wiki/Post/Redirect/Get
     header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
     die();
 
   endif;
 
-//$headerMeta = require_once("genericHeaderMeta.php");
+
 
   $meta["title"] = [
     "en" => "Login page",
@@ -36,7 +34,6 @@
   ];
 
   require_once $meta["themesDir"].$meta["theme"]."/header.php";
-//require_once $meta["themesDir"].$meta["theme"]."/nav.php";
 
   $hi = [
     "en" => $meta["title"]["en"],

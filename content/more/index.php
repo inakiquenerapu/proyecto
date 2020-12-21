@@ -7,7 +7,6 @@
   ];
 
   require_once $meta["themesDir"].$meta["theme"]."/header.php";
-//require_once $meta["themesDir"].$meta["theme"]."/nav.php";
 
   $hi = [
     "en" => $meta["title"]["en"],
